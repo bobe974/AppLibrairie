@@ -10,6 +10,7 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
@@ -22,24 +23,27 @@ import jakarta.persistence.Table;
 public class Emprunt implements Serializable{
 
     private static final long serialVersionUID = 144293603488149743L;
-
+        
     private EmpruntId pk = new EmpruntId();
+    
     
     private LocalDate beginDate;
     
     private LocalDate endDate;
     
-    private EnpruntStatut status;
+    //TODO private EnpruntStatut status; 
+ 
 
-    @EmbeddedId
-    public EmpruntId getPk() {
-        return pk;
+    @EmbeddedId  //clé composé 
+    public EmpruntId getPk() { 
+        return pk; 
     }
 
+    
     public void setPk(EmpruntId pk) {
         this.pk = pk;
-    }
-
+    } 
+    
     @Column(name = "DATE_DEBUT", nullable = false)
     public LocalDate getBeginDate() {
         return beginDate;
@@ -58,13 +62,14 @@ public class Emprunt implements Serializable{
         this.endDate = endDate;
     }
 
-    @Enumerated(EnumType.STRING)
+    /**@Enumerated(EnumType.STRING)
     @Column(name = "STATUS")
     public EmpruntStatut getStatus() {
         return status;
-    }
+    } 
 
     public void setStatus(EmpruntStatut status) {
-        this.status = status;
-    }
-}
+        this.status = status; 
+    }  **/
+ 
+}  

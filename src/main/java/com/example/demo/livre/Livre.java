@@ -41,6 +41,11 @@ public class Livre {
     
     Set<Emprunt> loans = new HashSet<Emprunt>();
     
+    
+    public Livre() {
+    	
+    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID_LIVRE")
@@ -116,7 +121,7 @@ public class Livre {
         this.category = category;
     }
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.book", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.livre", cascade = CascadeType.ALL)
     public Set<Emprunt> getLoans() {
         return loans;
     }

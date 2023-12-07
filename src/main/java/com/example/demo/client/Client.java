@@ -5,20 +5,27 @@ import java.util.Set;
 
 import com.example.demo.emprunt.Emprunt;
 
+//import com.example.demo.emprunt.Emprunt;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
 
 @Entity
 public class Client {
 	
 	private String idClient, nom, prenom, travail, email, adresse;
 	private LocalDate dateCreation;
-	Set<Emprunt> loans = new HashSet<Emprunt>();
+	Set<Emprunt> emprunt = new HashSet<Emprunt>();
 	
+	public Client() {}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -64,12 +71,21 @@ public class Client {
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
-	@Column(name = "DATE_CREATION", nullable = false)
+	@Column(name = "DATE_CREATION")
 	public LocalDate getDateCreation() {
 		return dateCreation;
 	}
 	public void setDateCreation(LocalDate dateCreation) {
 		this.dateCreation = dateCreation;
+	}
+	
+	public void setEmprunt(Set<Emprunt> emprunt) {
+		this.emprunt = emprunt;
+	}
+		
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.client", cascade = CascadeType.ALL)
+	public Set<Emprunt> getEmprunt(){
+		return this.emprunt;
 	}
 	
 	
